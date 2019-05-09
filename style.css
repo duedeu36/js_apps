@@ -71,7 +71,7 @@ body {
 }
 
 .active {
-   background-color: #f7f7f7;
+   background-color: #c9c9c9;
 }
 
 .active .player-name {
@@ -161,11 +161,13 @@ i {
 
 .dice {
    position: absolute;
+   /* border: 2px solid rgb(255, 132, 132); */
    left: 50%;
    top: 178px;
    transform: translateX(-50%);
    height: 100px;
-   box-shadow: 0px 10px 60px rgba(0, 0, 0, 0.10);
+   box-shadow: 4px 4px 18px 4px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
 }
 
 .winner {
