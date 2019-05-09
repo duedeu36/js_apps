@@ -16,7 +16,7 @@
 }
 
 body {
-   background-image: linear-gradient(rgba(62, 20, 20, 0.4), rgba(62, 20, 20, 0.4)), url(img/back.jpg);
+   background-image: linear-gradient(rgba(62, 20, 20, 0.4), rgba(62, 20, 20, 0.4)), url(img/back2.jpeg);
    background-size: cover;
    background-position: center;
    font-family: Lato;
@@ -114,6 +114,27 @@ button {
    left: 50%;
    transform: translateX(-50%);
    color: #555;
+   background: none;
+   border: none;
+   font-family: Lato;
+   font-size: 20px;
+   text-transform: uppercase;
+   cursor: pointer;
+   font-weight: 300;
+   transition: background-color 0.3s, color 0.3s;
+}
+
+input {
+   padding: 10px;
+   width: 80px;
+   text-align: center;
+}
+
+table {
+   position: absolute;
+   top: 530px;
+   left: 51.5%;
+   transform: translateX(-50%);
    background: none;
    border: none;
    font-family: Lato;
