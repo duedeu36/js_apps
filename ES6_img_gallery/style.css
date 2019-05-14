@@ -1,0 +1,43 @@
+body {
+   margin: 20px;
+   padding: 0;
+   background: #333;
+}
+
+.container {
+   max-width: 750px;
+   margin: auto;
+   border: #fff solid 3px;
+   background: #fff;
+}
+
+#current {
+   height: 800px;
+   object-fit: contain;
+   background: #fff
+}
+
+.main-img img,
+.imgs img {
+   width: 100%;
+}
+
+.imgs {
+   display: grid;
+   grid-template-columns: repeat(4, 1fr);
+   grid-gap: 3px;
+   height: 100px;
+   overflow: hidden;
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+   to {
+      opacity: 1;
+   }
+}
+
+.fade-in {
+   opacity: .4;
+   animation: fadeIn 0.5s ease-in 1 forwards;
+}
