@@ -1,0 +1,35 @@
+* {
+   margin: 0;
+   padding: 0;
+}
+
+/* div {
+   border: 1px solid red
+} */
+
+nav {
+   margin-bottom: 50px;
+}
+
+.radio-btn,
+.search-bar,
+.btn-div {
+   margin: 10px;
+}
+
+#search {
+   padding: 15px;
+   background: #e6e6e6;
+   border: 1px solid rgb(255, 181, 181);
+   box-shadow: 20px
+}
+
+label {
+   margin: 10px;
+}
+
+.result-select {
+   margin: 10px;
+}
+
+/*# sourceMappingURL=/style.e308ff8e.css.map */
