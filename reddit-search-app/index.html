@@ -30,31 +30,28 @@
               id="search-input"
             />
           </div>
-          <div class="radio-btn">
+          <div class="radio-btn inline">
             Sort by:
-
-            <div class="custom-control custom-radio custom-control-inline">
-              <input
-                type="radio"
-                id="customRadioInline1"
-                name="customRadioInline1"
-                checked
-                class="custom-control-input"
-              />
-              <label class="custom-control-label" for="customRadioInline1"
-                >Relevance</label
-              >
-            </div>
-            <div class="custom-control custom-radio custom-control-inline">
-              <input
-                type="radio"
-                id="customRadioInline2"
-                name="customRadioInline1"
-                class="custom-control-input"
-              />
-              <label class="custom-control-label" for="customRadioInline2"
-                >Latest</label
-              >
+            <div class="form-check-inline">
+              <div class="custom-control custom-radio inline">
+                <input
+                  type="radio"
+                  name="sortby"
+                  checked
+                  value="relevance"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Relevance</label>
+              </div>
+              <div class="custom-control custom-radio inline">
+                <input
+                  type="radio"
+                  name="sortby"
+                  value="latest"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Latest</label>
+              </div>
             </div>
           </div>
           <div class="result-select">
