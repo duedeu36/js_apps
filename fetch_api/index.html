@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Fetch API Sandbox</title>
+  </head>
+
+  <body>
+    <button id="getText">Get Text</button>
+    <button id="getUsers">Get JSON</button>
+    <button id="getPosts">Get API Data</button>
+    <hr />
+    <div id="output"></div>
+    <form action="" id="addPost">
+      <div>
+        <input type="text" id="title" placeholder="Title" />
+      </div>
+      <div>
+        <input type="text" id="body" placeholder="Body" />
+      </div>
+      <input type="submit" value="Submit" />
+    </form>
+
+    <script>
+      document.getElementById("getText").addEventListener("click", getText);
+
+      document.getElementById("getUsers").addEventListener("click", getUsers);
+
+      document.getElementById("getPosts").addEventListener("click", getPosts);
+
+      document.getElementById("addPost").addEventListener("submit", addPost);
+
+      function getText() {
+        //   fetch("sample.txt")
+        //     .then(function(res) {
+        //       return res.text();
+        //     })
+        //     .then(function(data) {
+        //       console.log(data);
+        //     });
+        fetch("sample.txt").then(res =>
+          res
+            .text()
+            .then(data => {
+              document.getElementById("output").innerHTML = `<h1>${data}</h1>`;
+            })
+            .catch(err => console.log(err))
+        );
+      }
+
+      function getUsers() {
+        fetch("users.json").then(res =>
+          res
+            .json()
+            .then(data => {
+              let output = `<h1>Users:</h1>`;
+              data.forEach(user => {
+                output += `<ul>
+                  <li>ID: ${user.id}</li>
+                  <li>Name: ${user.name}</li>
+                  <li>Email: ${user.email}</li>
+                  </ul>`;
+              });
+              document.getElementById("output").innerHTML = output;
+            })
+            .catch(err => console.log(err))
+        );
+      }
+
+      function getPosts() {
+        fetch("http://jsonplaceholder.typicode.com/posts").then(res =>
+          res
+            .json()
+            .then(data => {
+              let output = `<h1>Posts:</h1>`;
+              data.forEach(post => {
+                output += `<div>
+                     <h3>${post.title}</h3>
+                     <p>${post.body}</p>
+                  </div>`;
+              });
+              document.getElementById("output").innerHTML = output;
+            })
+            .catch(err => console.log(err))
+        );
+      }
+
+      function addPost(e) {
+        e.preventDefault();
+
+        let id = document.getElementById("title").value;
+        let name = document.getElementById("body").value;
+
+        fetch("users.json", {
+          method: "POST",
+          headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-type": "application/json"
+          },
+          body: JSON.stringify({
+            id: id,
+            name: name
+            // email: email
+          })
+        })
+          .then(res => res.json())
+          .then(data => {
+            console.log(data);
+          });
+      }
+    </script>
+  </body>
+</html>

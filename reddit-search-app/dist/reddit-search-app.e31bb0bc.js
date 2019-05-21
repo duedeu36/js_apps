@@ -117,9 +117,41 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"index.js":[function(require,module,exports) {
+})({"redditapi.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  search: function search(searchTerm, searchLimit, sortBy) {
+    return fetch("http://www.reddit.com/search.json?q=".concat(searchTerm, "&sort=").concat(sortBy, "&limit=").concat(searchLimit)).then(function (res) {
+      return res.json();
+    }).then(function (data) {
+      return data.data.children.map(function (data) {
+        return data.data;
+      });
+    }).catch(function (err) {
+      console.log(err);
+    });
+  }
+};
+exports.default = _default;
+},{}],"snoo.jpg":[function(require,module,exports) {
+module.exports = "/snoo.5c364e63.jpg";
+},{}],"index.js":[function(require,module,exports) {
+"use strict";
+
+var _redditapi = _interopRequireDefault(require("./redditapi"));
+
+var _snoo = _interopRequireDefault(require("./snoo.jpg"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var searchForm = document.getElementById("search-form");
-var searchInput = document.getElementById("search-input");
+var searchInput = document.getElementById("search-input"); // Form Event Listener
+
 searchForm.addEventListener("submit", function (e) {
   // Get search term
   var searchTerm = searchInput.value;
@@ -129,10 +161,60 @@ searchForm.addEventListener("submit", function (e) {
   console.log(sortBy); // Search limit
 
   var searchLimit = document.getElementById("limit").value;
-  console.log(searchLimit);
+  console.log(searchLimit); //   Check input
+
+  if (searchTerm === "") {
+    //   Show message
+    showMessage("Please add a search term", "alert-danger"); //  Please add.. is the 'message' parameter, alert-danger is the 'className' parameter underneath
+  } //   Clear search input
+
+
+  searchInput.value = ""; //   Search reddit
+
+  _redditapi.default.search(searchTerm, searchLimit, sortBy).then(function (results) {
+    var output = '<div class="card-columns">'; // Loop through posts
+
+    results.forEach(function (post) {
+      // Check for image
+      var image = post.preview ? post.preview.images[0].source.url : _snoo.default;
+      output += "<div class=\"card\">\n         <img class=\"card-img-top\" src=\"".concat(image, "\" alt=\"Card image cap\">\n         <div class=\"card-body\">\n           <h5 class=\"card-title\">").concat(post.title, "</h5>\n           <p class=\"card-text\">").concat(truncateText(post.selftext, 100) + '...', "</p>\n           <a href=\"").concat(post.url, "\" class=\"btn btn-danger\">More</a>\n         </div>\n       </div>");
+    });
+    output += '</div>';
+    document.getElementById("results").innerHTML = output;
+    console.log(results);
+  });
+
   e.preventDefault();
-});
-},{}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+}); // Show Message
+
+function showMessage(message, className) {
+  // Create div
+  var div = document.createElement("div"); // Add classes
+
+  div.className = "alert ".concat(className); //   Add text
+
+  div.appendChild(document.createTextNode(message)); //   Get parrent container
+
+  var searchContainer = document.getElementById("search-container"); // Get search
+
+  var search = document.getElementById("search"); // Insert message
+
+  searchContainer.insertBefore(div, search); // insert the div element before the search
+  // timeout alert div
+
+  setTimeout(function () {
+    return div.remove();
+  }, 2000);
+} // Truncate text
+
+
+function truncateText(text, limit) {
+  var shortend = text.indexOf(' ', limit); //if indexOf doesn't match a space, it will return a -1
+
+  if (shortend == -1) return text;
+  return text.substring(0, shortend);
+}
+},{"./redditapi":"redditapi.js","./snoo.jpg":"snoo.jpg"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -160,7 +242,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "37649" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41957" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
